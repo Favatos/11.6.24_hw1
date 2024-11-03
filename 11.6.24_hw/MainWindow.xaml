@@ -7,13 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="Open_Click"/>
+                <MenuItem Header="Close" Click="Close_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Fullscreen" Click="FullScreen_Click" x:Name="fullScreen"/>
+        </Menu>
+        
         <UniformGrid Rows="1" DockPanel.Dock="Bottom">
             <Button Click="ButtonPlay_Pause_Click" x:Name="buttonPlay">
                 Play
+                <Button.ToolTip>
+                    <ToolTip>
+                        Play/pause media
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
 
             <Button x:Name="volume" Click="volume_Click">
                 Volume
+                <Button.ToolTip>
+                    <ToolTip>
+                        Adjust volume of the media
+                    </ToolTip>
+                </Button.ToolTip>
             </Button>
 
             <Popup x:Name="popup" IsOpen="False"
@@ -26,16 +45,20 @@
                 </DockPanel>
             </Popup>
 
-            <TextBox TextChanged="TextBox_TextChanged" x:Name="textBox">
-                Enter absolute path:
-            </TextBox>
         </UniformGrid>
+
+        <StatusBar DockPanel.Dock="Bottom" x:Name="statusBar">
+            <StatusBarItem>
+                <TextBlock x:Name="textBlock"/>
+            </StatusBarItem>
+        </StatusBar>
 
         <MediaElement Source="Nyan Cat.mp4" Volume="0" 
                       x:Name="player"
                       LoadedBehavior="Manual" 
                       UnloadedBehavior="Manual"
-                      MediaFailed="player_MediaFailed"></MediaElement>
-        
+                      MediaFailed="player_MediaFailed"
+                      MediaOpened="player_MediaOpened">
+        </MediaElement>
     </DockPanel>
 </Window>
